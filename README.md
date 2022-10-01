@@ -1,2 +1,1 @@
-# sehm
-Code for KDD 2022 ADS Review
+# Self-explaining Hierarchical Model for Intraoperative Time Series
