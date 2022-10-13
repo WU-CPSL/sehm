@@ -11,11 +11,12 @@ import torch.optim as optim
 import numpy as np
 import utils
 import models
-import models.lstm_sehm_quan as lstm_sehm_quan
+import models.gru_sehm_quan as gru_sehm_quan
 import warnings
 from numpy import linalg as LA
 from sklearn.metrics import mean_absolute_error
 import data_loader_handoff
+from lap_dataset import MySet
 import argparse
 
 torch.multiprocessing.set_sharing_strategy('file_system')
@@ -137,7 +138,7 @@ def calcMetrics(model, mode):
 
 if __name__ == '__main__':
     # load pre-trained model for evaluation
-    model = lstm_sehm_quan.Model(108)
+    model = gru_sehm_quan.Model(108)
     model.load_state_dict(torch.load(csv_path+'sehm_model'), strict=False)
 
     total_params = sum(p.numel() for p in model.parameters() if p.requires_grad)

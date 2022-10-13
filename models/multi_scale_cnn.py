@@ -10,36 +10,26 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from torch.autograd import Variable
-from torch.nn.parameter import Parameter
-
-import math
-import numpy as np
-import time
-
-torch.autograd.set_detect_anomaly(True)
-
-T = 600
-D = 56
-
 class Model(nn.Module):
-    def __init__(self, rnn_hid_size):
+    def __init__(self, rnn_hid_size, seq_len=600, dim=56, **kwargs):
         super(Model, self).__init__()
 
         self.rnn_hid_size = rnn_hid_size
+        self.T = seq_len
+        self.D = dim
 
         self.build()
 
     def build(self):
-        self.cnn3 = nn.Conv1d(D, 13, 30, 15)
-        self.cnn4 = nn.Conv1d(D, 13, 40, 20, 100)
-        self.cnn5 = nn.Conv1d(D, 13, 50, 25, 200)
-        self.cnn6 = nn.Conv1d(D, 13, 60, 30, 300)
+        self.cnn3 = nn.Conv1d(self.D, 13, 30, 15)
+        self.cnn4 = nn.Conv1d(self.D, 13, 40, 20, 100)
+        self.cnn5 = nn.Conv1d(self.D, 13, 50, 25, 200)
+        self.cnn6 = nn.Conv1d(self.D, 13, 60, 30, 300)
         self.rnn = nn.LSTM(4*13, self.rnn_hid_size)
         self.out = nn.Linear(self.rnn_hid_size, 1)  
 
     def forward(self, data, labels):
-        values = torch.reshape(data, (data.shape[0], T, D))
+        values = torch.reshape(data, (data.shape[0], self.T, self.D))
         values = values.transpose(1,2)
         v3 = self.cnn3(values)
         v3 = v3.transpose(1,2)
@@ -63,7 +53,7 @@ class Model(nn.Module):
 
         return y_loss, y_h, 1.0
 
-    def run_on_batch(self, data, labels, optimizer, epoch = None):
+    def run_on_batch(self, data, labels, optimizer):
         ret = self(data, labels)
 
         if optimizer is not None:

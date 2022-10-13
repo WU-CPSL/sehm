@@ -24,14 +24,12 @@ import torch.optim as optim
 import numpy as np
 import utils
 import models
-import models.lstm_sehm as lstm_sehm
-import models.gru_sehm as gru_sehm
-import models.lstm as lstm
-import models.gru as gru
-import models.conv_lstm as conv_lstm
-import models.conv_gru as conv_gru
-import models.multi_scale_cnn as multi_scale_cnn
-import models.raim as raim
+import models.gru
+import models.conv_gru
+import models.multi_scale_cnn
+import models.gru_sehm
+import models.gru_sehm_train
+import models.gru_sehm_kernelized
 import argparse
 # load pneu or aki
 import data_loader_handoff_generator
@@ -130,7 +128,7 @@ def evaluate(model, val_iter):
 
 
 def run(nei):
-    model = getattr(models, args.model).Model(args.hid_size, nei)
+    model = getattr(models, args.model).Model(args.hid_size, nei=nei)
         
     total_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
     print('Total params is {}'.format(total_params))

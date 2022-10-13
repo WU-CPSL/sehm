@@ -8,7 +8,6 @@ data loader for training and testing
 
 #import ujson as json
 import numpy as np
-from sklearn.impute import SimpleImputer
 import pandas as pd
 
 import torch

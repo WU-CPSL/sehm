@@ -8,10 +8,8 @@ data loader for larger dataset, such as pneumonia or AKI, which cannot be fitted
 
 #import ujson as json
 import numpy as np
-import pandas as pd
 
 import torch
-import torch.nn as nn
 from torch.utils.data import Dataset, DataLoader
 
 class MySet(Dataset):
