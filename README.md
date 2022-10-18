@@ -2,7 +2,7 @@
 
 This is the repository for Self-explaining Hierarchical Model for Intraoperative Time Series (SEHM). SEHM comprises kernelized local attention and recurrent layers to effectively learn progression dynamics of high-resolution time series. A linear approximation module is parallel to the recurrent layers to ensure end-to-end interpretability. We performed evaluations on our in-house complication prediction dataset and public [HiRID](https://physionet.org/content/hirid/1.1.1/) dataset.
 
-The manuscript is now available on [arXiv](https://arxiv.org/abs/2210.04417) and is accepted by ICDM 2022 as a short paper.
+The work is accepted by ICDM 2022 as a short paper. The full manuscript is now available on [arXiv](https://arxiv.org/abs/2210.04417).
 
 ## Prerequisites
 
