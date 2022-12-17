@@ -14,6 +14,7 @@ and pip dependencies
 - sklearn
 - pytorch-fast-transformers>=0.3.0
 - einops
+- pandas
 
 ## Usage
 
